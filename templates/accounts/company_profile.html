@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block title %}
+    Signup
+{% endblock %}
+{% block sidebar %}
+
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6 col-md-offset-2">
+        <form role="form" action="" method="post" class="form-horizontal">
+            <h4>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</h4>
+            <h4>Company Details</h4>
+
+            {{ wizard.management_form }}    
+            {% csrf_token %}
+            {%  bootstrap_form form layout='horizontal' %}
+    
+            {% buttons submit='Sign Up' reset='Cancel'  layout='horizontal' %}{% endbuttons %}
+    {% if wizard.steps.prev %}
+            <button class="btn btn-primary btn-sm" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}"><span class="glyphicon glyphicon-fast-backward"></span>  {% trans "First step" %}</button>
+            <button class="btn btn-primary btn-sm" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}"><span class="glyphicon glyphicon-backward"></span>  {% trans "Prev step" %}</button>
+    {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}

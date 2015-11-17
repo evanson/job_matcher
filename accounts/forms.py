@@ -102,3 +102,8 @@ class JobSeekerForm(forms.Form):
     skills = forms.ModelMultipleChoiceField(queryset=JobSkill.objects.all(),
                                             widget=forms.CheckboxSelectMultiple())
 
+class EmployerForm(forms.Form):
+    company_name = forms.CharField()
+    description = forms.CharField(widget=forms.Textarea(attrs={'cols': '10', 'rows': '3'}))
+    location = forms.CharField()
+    address = forms.CharField(widget=forms.Textarea(attrs={'cols': '10', 'rows': '3'}))
