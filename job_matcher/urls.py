@@ -1,10 +1,14 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'job_matcher.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+import dashboard
+import accounts
+import job_skills
 
-    url(r'^admin/', include(admin.site.urls)),
+
+urlpatterns = patterns(
+    '',
+    url(r'^$', 'dashboard.views.index', name='index'),
+    url(r'^accounts/', include('accounts.urls')),
+    url(r'^jobs/categories/', include('job_skills.urls'))
 )

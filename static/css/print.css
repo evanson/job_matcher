@@ -1,0 +1,15 @@
+body {
+	  /*padding-top: 80px;*/
+	  position: relative;
+	  font-size: 10px;
+	  font-family: verdana, arial, "sans-serif";
+	  color: #000;
+	  text-align: justify;
+  }
+table {
+    border-collapse:collapse;
+  }
+.print{font-size: 10px;}
+.token-receipt{width:228px;}
+table tr.sep{border-bottom: 1px solid #000;}
+.token-receipt td{font-size: 10px;font-weight:small;padding:0px;}

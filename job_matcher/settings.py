@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'bootstrap3',
     'job_skills',
+    'dashboard',
     'accounts',
     'jobs',
 )

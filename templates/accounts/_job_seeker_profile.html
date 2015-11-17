@@ -1,0 +1,82 @@
+{% load bootstrap3 %}
+{% load i18n %}
+{% block bootstrap3_extra_script %}
+<script type="text/javascript">
+$(document).ready(function() {
+    //$('#id_job_seeker_profile-skills').hide()
+    //$('label[for="id_job_seeker_profile-skills"]').hide()
+
+    var opts = {
+        lines: 17, // The number of lines to draw
+        length: 0, // The length of each line
+        width: 100, // The line thickness
+        radius: 180, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 90, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#000', // #rgb or #rrggbb or array of colors
+        speed: 1.5, // Rounds per second
+        trail: 100, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: '50%', // Top position relative to parent
+        left: '50%' // Left position relative to parent
+        
+    };
+
+    function display_skills(category) {
+        var url = "{% url 'get_job_skills' %}"+"?category="+category
+        var spinner = new Spinner(opts).spin($('#info')[0]);
+            $.get(
+                url, {},
+                function(response){
+                    var html = '';
+                    var count = 0
+                    $.each(response, function(k, v){
+                        var checkbox = '<div class="checkbox"><label for="id_job_seeker_profile-skills_'+count+'">'+
+                                       '<input id="id_job_seeker_profile-skills_'+count+'" class="" type="checkbox" value="'+k+
+                                       '" title="" name="job_seeker_profile-skills">'+v+'</label></div>';
+                        html += checkbox;
+                        count += 1;
+                    });
+                    $('#id_job_seeker_profile-skills').html(html);
+                    spinner.stop()
+                });
+        $('#id_job_seeker_profile-skills').show()
+        $('label[for="id_job_seeker_profile-skills"]').show()
+
+    }
+
+    $('#id_job_seeker_profile-category').change(function(e){
+        var category=$.trim($(this).val());
+        display_skills(category)
+    });
+
+    if ($('#id_job_seeker_profile-category').has('[selected]')) {
+        var category = $.trim($('#id_job_seeker_profile-category').val());
+        display_skills(category)
+    }
+    
+});
+</script>
+{% endblock %}
+<div class="row">
+
+    <div class="col-md-4 col-md-offset-1">
+{% bootstrap_form_errors form %}
+        <h4>Job Experience Details</h4></h4>
+        <form role="form" action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ wizard.management_form }}    
+    {%  bootstrap_form form layout='horizontal' %}
+    {% buttons submit='Sign Up' reset='Cancel'  layout='horizontal' %}{% endbuttons %}
+    {% if wizard.steps.prev %}
+            <button class="btn btn-primary btn-sm" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}"><span class="glyphicon glyphicon-fast-backward"></span>  {% trans "First step" %}</button>
+            <button class="btn btn-primary btn-sm" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}"><span class="glyphicon glyphicon-backward"></span>  {% trans "Prev step" %}</button>
+    {% endif %}
+
+        </form>
+</div></div>
+</br>

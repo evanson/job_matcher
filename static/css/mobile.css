@@ -1,0 +1,176 @@
+
+div.body {
+	clear: both;
+	
+	padding: 1em;
+
+}
+
+.dialog {
+	box-shadow: none;
+	border: 1px solid #999999;
+	
+}
+
+table.fancy ul li {
+	display: inline;
+	
+	margin: 1em 0;
+
+}
+
+fieldset.info {
+	width: 100%;
+	border-left: none;
+	border-right: none;
+
+}
+
+fieldset.buttons button {
+	width: calc( 100% - 3em );
+	
+	margin: 0.5em auto;
+	padding: 1em 1.5em;
+	
+	font-size: 1em;
+
+}
+
+fieldset.buttons {
+	padding: 0;
+
+}
+
+div.body table.fancy {
+	width: 90%;
+
+}
+
+div.body table.fancy thead {
+	display: none;
+
+}
+
+div.body table.fancy tr {
+	display: block;
+	
+	border: 1px solid #999999;
+	border-bottom: none;
+	
+/*	box-shadow: 0.2em 0.2em 0.5em #999; */
+
+}
+
+div.body table.fancy tr:last-child {
+	border-bottom: 1px solid #999999;
+
+}
+
+div.body table.fancy tr td {
+	display: block;
+	text-align: right;
+	
+	padding: 0.5em;
+	border-bottom: 1px dotted #cccccc;
+
+}
+
+div.body table.fancy tr td:last-child {
+	border-bottom: none;
+
+}
+
+div.body table.fancy tr td:empty {
+	display: none;
+
+}
+
+div.body table.fancy tr td:before {
+	content: attr(data-label);
+	float: left;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+div.body table.fancy tbody tr td:first-child {
+	display: none;
+
+}
+
+div.left, div.right {
+	display: none;
+
+}
+
+div.main {
+	width: 100%;
+	
+	padding: 1em 1%;
+
+}
+
+a.button {
+	display: block;
+	width: 90%;
+	
+	padding: 1em 0.5em;
+	margin: 0 auto;
+	
+	text-align: center;
+
+}
+
+div.footer_col {
+	width: 100%;
+	display: block;
+	float: none;
+
+}
+
+div.copyright {
+	padding-left: 1em;
+
+}
+
+.logo {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 1em; /*
+	margin-bottom: 2em;*/
+
+}
+
+div.nav {
+	padding: 1em 0;
+
+}
+
+div.nav ul {
+	float: none;
+	
+	border-top: 2px solid #034064;
+	border-bottom: 2px solid #034064;
+	
+}
+
+div.nav li {
+	display: block;
+
+}
+
+div.nav li a {
+	box-sizing: border-box;
+	width: 100%;
+	display: block;
+	padding: 0.7em 2em;
+	border: none;
+	border-bottom: 1px dashed white;
+	
+	font-weight: bold;
+	
+}
+
+div.nav li:last-of-type a {
+	border-bottom: none;
+
+}

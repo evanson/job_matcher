@@ -1,0 +1,695 @@
+* {
+	padding: 0;
+	margin: 0;
+
+}
+
+body {
+	background-color: white;
+	color: black;
+	
+	font-family: sans-serif;
+
+}
+
+div.wrapper {
+	padding: 1em;
+
+}
+
+div.body {
+	clear: both;
+	
+	padding: 1em;
+
+}
+
+/* bootstrap nullification */
+
+ol, ul {
+	margin-bottom: 0;
+
+}
+
+div.header {
+
+}
+
+div.nav {
+	margin: 0;
+	padding: 1em;
+	background-color: white;
+	color: white;
+
+}	
+
+div.nav li a {
+	text-decoration: none;
+	
+	color: white;
+	background-color: #034064;
+	border: 1px solid #034064;
+	
+	padding: 0.5em 1em;
+	
+	transition-property: background-color, color;
+	transition-duration: 1s;
+
+}
+
+div.nav li a:hover {
+	color: #034064;
+	background-color: white;
+
+}
+
+table.pretty {
+	border-collapse: collapse;
+
+}
+
+table.pretty tbody th {
+	text-align: right;
+
+}
+
+table.pretty tbody tr td, table.pretty tbody th {
+	padding: 0.4em 1em;
+	
+	border-top: 1px solid #999999;
+
+}
+
+table.pretty tbody tr:last-of-type {
+	border-bottom: 1px solid #999999;
+
+}
+
+table.pretty tbody tr:nth-of-type( 2n ) {
+	background-color: #E5E5FF;
+
+}
+
+table.fancy {
+	border-collapse: collapse;
+	
+	margin: 1em;
+	padding: 1em;
+
+}
+
+table.fancy thead, table.fancy tfoot {
+	background-color: #034064;
+	color: white;
+
+}
+
+table.fancy th {
+	padding: 0.5em 1em;
+	font-weight: normal;
+
+}
+
+table.fancy tbody {}
+
+table.fancy tbody tr:nth-of-type( 2n ) {
+	background-color: #E5E5FF;
+
+}
+
+table.fancy tbody tr:hover {
+	background-color: #FFCE75;
+
+}
+
+table.fancy tbody td {
+	padding: 0.4em 1em;
+
+}
+
+table.fancy ul {
+	list-style: none;
+
+}
+
+table.fancy ul li {
+	display: inline;
+
+}
+
+table.fancy ul li a {
+	text-decoration: none;
+	
+	background-color: #034064;
+	color: white;
+
+	font-size: 1em;
+	font-weight: normal;
+	
+	padding: 0.2em 1em;
+	
+	border-radius: 0.2em;
+
+}
+
+.numeric {
+	text-align: right;
+
+}
+
+.dialog {
+	box-shadow: 0 0 0.5em #999999;
+	border-radius: 0.3em;
+	
+	padding-bottom: 0.5em;
+	max-width: 600px;	
+	margin: 1em auto;
+
+}
+
+fieldset {
+	border: none;
+
+}
+
+fieldset.info {
+	border: 1px solid grey;
+	
+	width: 96%;
+	margin: 2em auto 1em;
+
+}
+
+fieldset.info div.row:last-of-type {
+	padding-bottom: 2em;
+
+}
+
+div.dialog h3:first-of-type {
+	width: auto;
+	
+	padding: 0.5em 2%;
+	margin: 0;
+	
+	color: white;
+	background-color: #034064;
+	
+	border-top-left-radius: 0.3em;
+	border-top-right-radius: 0.3em;
+
+	font-size: 1em;
+	font-weight: normal;
+
+}
+
+fieldset.info legend, .legend { 
+	width: auto;
+	
+	padding: 0.5em 2%;
+	margin: -1em 2% 0 0;
+	
+	color: white;
+	background-color: #034064;
+	
+	float: right;
+	
+}
+
+fieldset.info div.row {
+	padding: 1em 1em 0.5em;
+
+}
+
+fieldset.info div.row:nth-of-type( 2n ) {
+	background-color: #E5E5FF;
+
+}
+
+fieldset.info label {
+	display: block;
+	
+	margin-bottom: 0.5em;
+
+}
+
+fieldset.info textarea, fieldset.info input {
+	width: calc( 100% - 2em );
+	
+}
+
+fieldset.info select {
+	width: 100%;
+	padding: 0.4em 0;
+
+}
+
+fieldset.info textarea, fieldset.info input, div.card input {
+	border: 1px solid #999999;
+	
+	padding: 0.4em 1em 0.4em;
+	border-radius: 0.2em;
+	
+	font-family: sans-serif;
+	font-size: 0.9em;
+
+}
+
+fieldset.info textarea:required, fieldset.info input:required {
+	border: 1px solid red;
+
+}
+
+fieldset.info textarea:focus, fieldset.info input:focus {
+	background-color: yellow;
+	border-width: 2px;
+
+}
+
+fieldset.buttons {
+	padding: 0;
+	
+	text-align: center;
+
+}
+
+fieldset.buttons button, a.button, div.card button {
+	padding: 0.3em 1.5em 0.4em;
+	margin: 0 5%;
+	
+	background-color: #034064;
+	color: white;
+	
+	border: none;
+	border-radius: 0.2em;
+	
+	font-size: 1em;
+	
+	text-decoration: none;
+	text-transform: lowercase;
+
+}
+
+fieldset.buttons button[ type="reset" ], a.negative {
+	background-color: #ED1C24;
+
+}
+
+fieldset.buttons button[ type="submit" ], a.positive {
+	background-color: green;
+
+}
+
+fieldset.buttons button {
+	box-sizing: border-box;
+	margin: 0.5em 2%;
+	padding: 0.7em 2em;
+	
+	width: calc( 50% - ( 2 * 2.5% ) );
+
+}
+
+fieldset.buttons button:only-child {
+	
+	width: calc( 100% - ( 2 * 2% ) );
+
+}
+
+.dialog p {
+	margin: 1em;
+	
+}
+
+span.message {
+	display: block;
+	padding: 0.5em 0.5em 0;
+	
+	font-size: 0.8em;
+
+}
+
+.overlay {
+	display: none;
+
+}
+
+.overlay_active {
+	display: block;
+	
+	background-color: black;
+	opacity: 0.3;
+	
+	position: absolute;
+	
+	top: 0; 
+	left: 0;
+	
+	width: 100%;
+	height: 100%;
+
+}
+
+/*
+
+div.card {
+	padding: 1em;
+	box-shadow: 0.3em 0.3em 0.5em #999999;
+	
+	margin: 1em;
+
+}
+
+div.card legend {
+	font-weight: bold;
+	margin: 0.5em 0;
+
+}
+
+*/
+
+div.product {
+		box-shadow: 0.2em 0.2em 0.4em #999;
+		
+		padding: 1em;
+		margin: 1em;
+		
+		width: 28%;
+		min-width: 300px;
+		float: left;	
+	
+	} 
+	
+	div.product img {
+		width: 100%;
+	
+	}
+	
+	.clear-bottom {
+		clear: both;
+	
+	}
+
+
+div.wrapper {
+/*	width: 980px; */
+	margin: 0 auto;
+	padding: 0;
+
+}
+
+h1, h2, h3, h4 {
+	color: #034064;
+	margin: 0.5em 0;
+
+}
+
+section {
+	padding: 1em;
+	
+}
+	
+div.main {	
+	background-color: #F8F8F8;
+	border: 1px solid #E7E7E7;
+}
+
+section.body {
+	padding: 0;
+	
+	background-color: white;
+
+}
+
+section p, section li {
+	margin: 1em 0;
+
+}
+
+section li {
+	margin: 0.5em 1em;
+
+}
+
+
+div.column {
+	box-sizing: border-box;
+	width: 25%;
+
+}
+
+div.right {
+	float: left;
+
+	min-height: 20em;
+
+}
+
+div.left {
+	float: left; 
+
+	min-height: 20em;
+
+}
+
+div.main {
+	width: 50%;
+	min-width: 40%;
+	float: left;
+	
+	padding: 1em;
+
+}
+
+div.nav ul {
+	float: right;
+
+}
+
+div.nav ul li {
+	display: inline;
+
+}
+
+div.signUp_box {
+	text-align: right;
+	padding: 0.5em 2em;
+	margin: 0 0;
+	
+	background-color: #034064;
+	
+	color: white;
+
+}
+
+div.signUp_box li {
+	list-style: none;
+	display: inline;
+
+	margin: 0em 0.2em;
+
+}
+
+.signUp_box a {
+	text-decoration: none;
+	color: white;
+	
+	padding : 0.5em;
+
+}
+
+.signUp_box a:hover, .signUp_box a:active, .signUp_box a:visited {
+	color: white;
+
+}
+
+
+span.check_option {
+	padding: 0.5em;
+
+}
+
+
+fieldset.info span.check_option input {
+	width: auto;
+	margin: 0 1em;
+
+}
+
+footer {
+	clear: both;
+	
+	background-color: #034064;
+	color: white;
+	
+	padding: 0;
+
+}
+
+footer a, footer a:hover {
+	color: white;
+	text-decoration: none;
+	
+	padding: 0.5em;
+	
+}
+
+footer .social a {
+	background-color: inherit; 
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 32px;
+	
+	padding-left: 38px;
+	
+}
+
+footer a.facebook { 
+	background-image: url(../img/social.media/facebook.png);
+	
+}
+
+footer a.twitter { 
+	background-image: url(../img/social.media/twitter.png);
+	
+}
+
+footer a.gplus { 
+	background-image: url(../img/social.media/google.png);
+	
+}
+
+footer a.youtube { 
+	background-image: url(../img/social.media/youtube.png);
+	
+}
+
+footer a.whatsapp { 
+	background-image: url(../img/social.media/whatsapp.png);
+	
+}
+
+footer li {
+	list-style: none;
+	margin: 1em 0.5em;
+
+}
+
+div.footer_col {
+	box-sizing: border-box;
+	width: 33%;
+ /*	max-width: 320px; */
+	
+	float: left;
+	
+	padding: 0.5em 1em;
+
+}
+
+div.copyright {
+	box-sizing: border-box;
+	width: 100%; 
+	padding: 0.5em;
+	
+	text-align: center;
+	
+	clear: both;
+	
+	background-color: #ED1C24;
+	
+}
+
+.logo {
+	width: 250px;
+	
+	padding: 1em;
+
+}
+
+.vehicle_display {
+	margin: 1em;
+	
+	box-shadow: 0 0 0.2em grey;
+	
+}
+
+.vehicle_display:hover {
+	background-color: #E5E5FF;
+	
+	box-shadow: 0 0 0.4em #333333;
+
+}
+
+.img-holder {
+	padding: 0.5em;
+
+}
+
+.vehicle_display p {
+	padding-bottom: 0;
+
+}
+
+.card {
+	box-shadow: 0 0 0.2em grey;
+
+}
+
+.card:hover {
+	box-shadow: 0 0 0.4em grey;
+
+}
+
+noscript {
+	background-color: #ED1C24;
+	color: white;
+	
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	
+	padding: 0.5em 0 0.1em;
+	
+	display: block;
+
+}
+
+.main-image {
+	width: 750px;
+	padding: 2em 1em 1em 2em;
+	
+}
+
+.main-image img {
+	border: 0.5em solid white;
+	box-shadow: 0.5em 0.5em 2em #666666;
+				
+	width: 100%;
+	max-width: calc( 750px - 3em );			
+							 
+}
+
+.thumbnails {
+	box-sizing: border-box;
+	max-width: 750px;
+	
+	padding: 1em;
+	
+	overflow-x: scroll;
+	
+}
+
+.thumbnails img {
+	width: 150px; 
+	cursor: pointer; 
+	
+	box-shadow: 0 0 0.1em #666666;
+	
+	display: inline;
+	
+	margin: 0.5em;
+
+}
+
+.thumbnails img:hover {
+	box-shadow: 0.1em 0.1em 0.3em #666666;
+
+}

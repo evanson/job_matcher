@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -12,6 +13,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     role = models.SlugField(choices=ROLE_CHOICES)
     phone = models.CharField(max_length=20, null=True, blank=True)
+    activation_key = models.CharField(max_length=40, blank=True, null=True)
+    key_expires = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
