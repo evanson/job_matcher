@@ -1,0 +1,11 @@
+Design and build a job matching system MVP
+It should be able to match a job to job seekers based on relevant variables. 
+
+Required features:
+- Post a job and define which variables (decided by you) are mandatory and which are optional
+- Match that job to a defined number of job seekers based on relevant variables 
+
+Optional features:
+- Send messages (sms/email) to selected job seekers with a customised message telling them how to report their interest in the job
+- Remove unwanted job seekers from the list
+- Save the job match to be able to go back to it later

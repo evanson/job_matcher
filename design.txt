@@ -1,0 +1,97 @@
+[Users]
+Categories of users -> Admin, Employers, Job Seekers
+
+*Job Seekers*
+Profile has field of work (category), a list of skills + years of
+experience
+When a Job seeker logs in, they see a list of job matches
+
+
+[Posting a Job]
+Select category - eg IT & Programming
+Add required skills.
+Add optional skills.
+Add required years of experience
+
+Each category has predefined skills, but also allows users to add
+their own
+
+When a job is posted, a background task is spawned that matches the
+job to job seekers, creating `JobMatch` objects in the process
+
+A cron job runs daily, sending job matches to job seekers. A job
+seeker can tick 'interested/not interested' for each job
+
+When seeker clicks interested/not interested, the JobMatch is marked
+as such
+
+The job poster can see a list of matching candidates for each job,
+with a field showing the matching skills
+
+
+
+[Job Matching]
+Match years of experience required with job seeker years of experience
+& required skills with listed skills of job seekers in that category
+
+Strong match, medium match, weak match -> Use python set operations ie
+set comparison of required skills & job seeker skills
+
+Matching is done only for available candidates
+
+
+[Models]
++-------User Profile-------+
+| *user
+| role
+| phone
+| created at
++--------------------------+
+
++--------Job Seeker--------+
+| *user
+| category
+| summary
+| years of experience
+| skills
+| available_for_work <bool>
++--------------------------+
+
++---------Skill------------+
+| category
+| name
++--------------------------+
+
++------Job Seeker Skill----+
+| *Job Seeker
+| *skill
++--------------------------+
+
++--------Employer----------+
+| *user
+| company
+| description
+| location
+| address
++--------------------------+
+
+
++-------------Job--------------+
+| *employer
+| description/responsibilities
+| category
+| years of experience required
+| required skills
+| optional skills
+| other
+| created at
++------------------------------+
+
++--------------------Job Match-------------------+
+| *job
+| *Job Seeker <job & job seeker unique together>
+| weight -> strong match, weak match etc
+| created_at
+| notification sent <bool>
+| status - interested/not interested
++------------------------------------------------+
