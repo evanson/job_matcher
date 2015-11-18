@@ -34,7 +34,7 @@
             <p>{{job.other}}</p>
         </div>        
         <div class="col-md-2">
-            <p class="text-success"><strong><a class="text-success" href="{% url 'job_matches' job.id %}">{{job.jobmatch_set.all.count}} matching candidates</a></strong></p>
+            <p class="text-success"><strong><a class="text-success" href="{% url 'job_matches' job.id %}">{{job.jobmatches}} matching candidates</a></strong></p>
         </div>
     </div>
     {% endfor %}

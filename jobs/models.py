@@ -13,6 +13,9 @@ class Job(models.Model):
     other = models.CharField(max_length=600, verbose_name="Additional Information")
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def jobmatches(self):
+        return self.jobmatch_set.filter(status='interested').count()
+
 
 class RequiredJobSkill(models.Model):
     job = models.ForeignKey(Job)
