@@ -1,0 +1,49 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% load i18n %}
+
+<div class="row">
+<h3>My Job Openings</h3>
+{% if pager %}
+    {% for job in pager %}
+    <div class="row job_display">
+        <div class="col-md-3">
+            <h4>Category: {{job.get_category_display}}</h4>
+            <p><strong>Years of experience: {{job.years_of_experience}}</strong></p>
+            <p>{{job.description}}</p>
+        </div>
+        <div class="col-md-2">
+            <h4>Required skills</h4>
+            <ul class="list-unstyled">
+            {% for skill in job.requiredjobskill_set.all %}
+                <li><i class="fa fa-check"></i> {{ skill.skill.name }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-2">
+            <h4>Optional skills</h4>
+            <ul class="list-unstyled">
+            {% for skill in job.optionaljobskill_set.all %}
+                <li><i class="fa fa-check"></i> {{ skill.skill.name }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h4>Other Information</h4>
+            <p>{{job.other}}</p>
+        </div>        
+        <div class="col-md-2">
+            <p class="text-success"><strong><a class="text-success" href="{% url 'job_matches' job.id %}">{{job.jobmatch_set.all.count}} matching candidates</a></strong></p>
+        </div>
+    </div>
+    {% endfor %}
+    {% with page_obj=pager paginator=pager.paginator%}
+        {% load paginator %}{% paginator 3 %}	
+    {% endwith %}
+
+{% else %}
+        <div class="alert alert-info">
+            {% trans "You've not added any job openings" %}
+        </div>
+{% endif %}
+</div>

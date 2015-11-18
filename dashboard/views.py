@@ -28,6 +28,12 @@ def server_error(request, msg=None):
 def index(request):
     try:
         if request.user.is_authenticated():
+            if request.user.userprofile.role == 'employer':
+                return HttpResponseRedirect(reverse('my_jobs'))
+
+            if request.user.userprofile.role == 'job_seeker':
+                return HttpResponseRedirect(reverse('my_job_matches'))
+                
             return HttpResponseRedirect(reverse('profile'))
         else:
             if request.method == 'POST':
@@ -44,7 +50,7 @@ def index(request):
                         if user.is_active:
                             login(request, user)
                             print "index: Login: User [%s] successfully logged in." %(username)
-                            return HttpResponseRedirect(reverse('profile'))
+                            return HttpResponseRedirect('/')
                         else:
                             messages.error(request,
                                             "Login Account for User [%s] is currently disabled." %(username))

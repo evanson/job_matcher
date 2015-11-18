@@ -1,0 +1,73 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% load i18n %}
+
+<div class="row">
+<h3>Job</h3>
+<div class="row job_display">
+        <div class="col-md-4">
+            <h4>Company: {{job.employer.company}}</h4>
+            <h4>Category: {{job.get_category_display}}</h4>
+            <p><strong>Years of experience: {{job.years_of_experience}}</strong></p>
+            <p>{{job.description}}</p>
+        </div>
+        <div class="col-md-2">
+            <h4>Required skills</h4>
+            <ul class="list-unstyled">
+            {% for skill in job.requiredjobskill_set.all %}
+                <li><i class="fa fa-check"></i> {{ skill.skill.name }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-2">
+            <h4>Optional skills</h4>
+            <ul class="list-unstyled">
+            {% for skill in job.optionaljobskill_set.all %}
+                <li><i class="fa fa-check"></i> {{ skill.skill.name }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h4>Other Information</h4>
+            <p>{{job.other}}</p>
+        </div>        
+</div>
+<h3>Matching Candidates</h3>
+{% if pager %}
+    {% for match in pager %}
+    <div class="row job_display">
+        <div class="col-md-3">
+            <h4>Basic Information</h4>
+            <p><strong>Name: </strong>{{match.seeker.user.get_full_name}}</p>
+            <p><strong>Years of experience: </strong>{{match.seeker.years_of_experience}}</p>
+        </div>
+        <div class="col-md-3">
+            <h4>Summary</h4>
+            <p>{{match.seeker.summary}}</p>
+        </div>
+        <div class="col-md-3">
+            <h4>Skills</h4>
+            <ul class="list-unstyled">
+            {% for skill in match.seeker.jobseekerskill_set.all %}
+                <li><i class="fa fa-check"></i> {{ skill.skill.name }}</li>
+            {% endfor %}                
+            </ul>
+        </div>
+        <div class="col-md-3">
+            {% ifequal match.weight 'strong' %}
+                <p><i class="fa fa-star fa-4x"></i> </p>
+            {% endifequal %}
+            <p class="text-success"><strong>{{match.get_weight_display}}</strong></p>
+            <p><strong>Match Score: {{match.score}}</strong></p>
+        </div>
+    </div>
+    {% endfor %}
+    {% with page_obj=pager paginator=pager.paginator%}
+        {% load paginator %}{% paginator 3 %}	
+    {% endwith %}
+{% else %}
+        <div class="alert alert-info">
+            {% trans "No Matching Candidates" %}
+        </div>
+{% endif %}
+</div>

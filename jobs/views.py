@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib import messages
 from django.contrib.auth.decorators import (login_required, permission_required,
                                             user_passes_test)
@@ -13,11 +14,13 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from django.conf import settings
 
+from job_matcher.settings import PER_PAGE
 from dashboard.views import server_error
 from forms import JobForm
-from models import Job, RequiredJobSkill, OptionalJobSkill
-from accounts.models import Employer
+from models import Job, RequiredJobSkill, OptionalJobSkill, JobMatch
+from accounts.models import Employer, JobSeeker
 from tasks import match_job
+from decorators import can_view_matches_for_job
 
 
 @login_required
@@ -47,6 +50,72 @@ def add_job(request):
             messages.success(request, "Job saved successfully. You'll receive matching candidates soon")
             return HttpResponseRedirect(reverse('profile'))
         return render(request, 'jobs/add_job.html', {'form': form})
+    except Exception, e:
+        logging.exception(e)
+        return server_error(request)
+
+
+@login_required
+@user_passes_test(lambda u: u.userprofile.role == 'employer')
+def my_jobs(request):
+    try:
+        employer = Employer.objects.get(user=request.user)
+        jobs = Job.objects.filter(employer=employer)
+        page = request.GET.get('page')
+        paginator = Paginator(jobs, PER_PAGE)
+        try:
+            pager = paginator.page(page)
+        except PageNotAnInteger:
+            pager = paginator.page(1)
+        except EmptyPage:
+            pager = paginator.page(paginator.num_pages)
+
+        return render(request, 'jobs/my_jobs.html',
+                      {'pager': pager})
+    except Exception, e:
+        logging.exception(e)
+        return server_error(request)
+
+
+@login_required
+@can_view_matches_for_job
+def job_matches(request, id):
+    try:
+        job = Job.objects.get(id=id)
+        matches = JobMatch.objects.filter(job=job)
+        page = request.GET.get('page')
+        paginator = Paginator(matches, PER_PAGE)
+        try:
+            pager = paginator.page(page)
+        except PageNotAnInteger:
+            pager = paginator.page(1)
+        except EmptyPage:
+            pager = paginator.page(paginator.num_pages)
+
+        return render(request, 'jobs/job_matches.html',
+                      {'pager': pager, 'job': job})
+    except Exception, e:
+        logging.exception(e)
+        return server_error(request)
+
+
+@login_required
+@user_passes_test(lambda u: u.userprofile.role == 'job_seeker')
+def my_job_matches(request):
+    try:
+        seeker = JobSeeker.objects.get(user=request.user)
+        matches = JobMatch.objects.filter(seeker=seeker)
+        page = request.GET.get('page')
+        paginator = Paginator(matches, PER_PAGE)
+        try:
+            pager = paginator.page(page)
+        except PageNotAnInteger:
+            pager = paginator.page(1)
+        except EmptyPage:
+            pager = paginator.page(paginator.num_pages)
+
+        return render(request, 'jobs/my_job_matches.html',
+                      {'pager': pager})
     except Exception, e:
         logging.exception(e)
         return server_error(request)

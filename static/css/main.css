@@ -604,14 +604,14 @@ div.copyright {
 
 }
 
-.vehicle_display {
+.job_display {
 	margin: 1em;
 	
 	box-shadow: 0 0 0.2em grey;
 	
 }
 
-.vehicle_display:hover {
+.job_display:hover {
 	background-color: #E5E5FF;
 	
 	box-shadow: 0 0 0.4em #333333;
@@ -623,7 +623,7 @@ div.copyright {
 
 }
 
-.vehicle_display p {
+.job_display p {
 	padding-bottom: 0;
 
 }
