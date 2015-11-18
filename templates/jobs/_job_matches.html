@@ -10,6 +10,7 @@
             <h4>Category: {{job.get_category_display}}</h4>
             <p><strong>Years of experience: {{job.years_of_experience}}</strong></p>
             <p>{{job.description}}</p>
+            <p><strong>Added on: </strong>{{job.created_at}}</p>
         </div>
         <div class="col-md-2">
             <h4>Required skills</h4>
@@ -59,6 +60,7 @@
             {% endifequal %}
             <p class="text-success"><strong>{{match.get_weight_display}}</strong></p>
             <p><strong>Match Score: {{match.score}}</strong></p>
+            <p><strong>Candidate comments: {{match.get_status_display}}</strong></p>
         </div>
     </div>
     {% endfor %}

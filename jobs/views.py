@@ -16,11 +16,11 @@ from django.conf import settings
 
 from job_matcher.settings import PER_PAGE
 from dashboard.views import server_error
-from forms import JobForm
+from forms import JobForm, InterestForm
 from models import Job, RequiredJobSkill, OptionalJobSkill, JobMatch
 from accounts.models import Employer, JobSeeker
 from tasks import match_job
-from decorators import can_view_matches_for_job
+from decorators import can_view_matches_for_job, has_match_for_job
 
 
 @login_required
@@ -60,7 +60,7 @@ def add_job(request):
 def my_jobs(request):
     try:
         employer = Employer.objects.get(user=request.user)
-        jobs = Job.objects.filter(employer=employer)
+        jobs = Job.objects.filter(employer=employer).order_by('-created_at')
         page = request.GET.get('page')
         paginator = Paginator(jobs, PER_PAGE)
         try:
@@ -82,7 +82,9 @@ def my_jobs(request):
 def job_matches(request, id):
     try:
         job = Job.objects.get(id=id)
-        matches = JobMatch.objects.filter(job=job)
+        matches = JobMatch.objects.filter(job=job,
+                                          status='interested').order_by(
+                                              '-created_at', '-score')
         page = request.GET.get('page')
         paginator = Paginator(matches, PER_PAGE)
         try:
@@ -104,7 +106,7 @@ def job_matches(request, id):
 def my_job_matches(request):
     try:
         seeker = JobSeeker.objects.get(user=request.user)
-        matches = JobMatch.objects.filter(seeker=seeker)
+        matches = JobMatch.objects.filter(seeker=seeker).order_by('-created_at', '-score')
         page = request.GET.get('page')
         paginator = Paginator(matches, PER_PAGE)
         try:
@@ -116,6 +118,31 @@ def my_job_matches(request):
 
         return render(request, 'jobs/my_job_matches.html',
                       {'pager': pager})
+    except Exception, e:
+        logging.exception(e)
+        return server_error(request)
+
+
+@login_required
+@user_passes_test(lambda u: u.userprofile.role == 'job_seeker')
+@has_match_for_job
+def mark_interest_in_job(request, id):
+    try:
+        job = Job.objects.get(id=id)
+        seeker = JobSeeker.objects.get(user=request.user)
+        match = JobMatch.objects.get(job=job, seeker=seeker)
+        form = InterestForm(request.POST or None)
+        if form.is_valid():
+            match.status = form.cleaned_data['status']
+            match.save()
+
+            messages.success(request,
+                             'Your interest in the job has been marked as %s' % match.get_status_display())
+            return HttpResponseRedirect('/')
+
+        return render(request, 'jobs/mark_interest.html', {'job': job,
+                                                           'form': form,
+                                                           'match': match})
     except Exception, e:
         logging.exception(e)
         return server_error(request)

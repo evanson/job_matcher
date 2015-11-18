@@ -1,12 +1,20 @@
+{% extends "base.html" %}
+{% load humanize %}
 {% load bootstrap3 %}
-{% load staticfiles %}
 {% load i18n %}
 
+{% block title%}
+    {% trans "Mark Interest in Job" %}
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+{% block controlbar %}
+{% endblock %}
+{% block content %}
 <div class="row">
-<h3>My Job Matches</h3>
-{% if pager %}
-    {% for match in pager %}
-    {% with job=match.job %}
+<div class="row">
+<h3>Mark Interest in Job</h3>
     <div class="row job_display">
         <div class="col-md-4">
             <p><strong>Company: </strong>{{ job.employer.company }}</p>
@@ -41,18 +49,19 @@
             {% endifequal %}
             <p class="text-success"><strong>{{match.get_weight_display}}</strong></p>
             <p><strong>Match Score: {{match.score}}</strong></p>
-            <p><strong><a href="{% url 'mark_interest' job.id %}">Interest in Job: {{match.get_status_display}}</a></strong></p>
+            <p><strong>Interest in Job: {{match.get_status_display}}</strong></p>
         </div>        
     </div>
-    {% endwith %}
-    {% endfor %}
-    {% with page_obj=pager paginator=pager.paginator%}
-        {% load paginator %}{% paginator 3 %}	
-    {% endwith %}
-
-{% else %}
-        <div class="alert alert-info">
-            {% trans "No Job matches" %}
-        </div>
-{% endif %}
+    <div class="row">
+    <div class="col-md-4">
+        {% bootstrap_form_errors form  %}
+        <form role="form" id="form" action="" method="post" class="form-horizontal">
+        <h4>Update interest</h4>
+        {% csrf_token %}
+        {%  bootstrap_form form layout='horizontal' %}
+        {% buttons submit='Update'  layout='horizontal' %}{% endbuttons %}
+        </form>
+    </div>
+    </div>
 </div>
+{% endblock %}

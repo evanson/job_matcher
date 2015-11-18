@@ -1,5 +1,6 @@
 from django import forms
 from job_skills.models import JobSkill
+from models import JobMatch
 
 
 class JobForm(forms.Form):
@@ -15,3 +16,8 @@ class JobForm(forms.Form):
     other = forms.CharField(widget=forms.Textarea(attrs={'cols': '20',
                                                           'rows': '15'}),
                              label='Any other Job requirements')
+
+
+
+class InterestForm(forms.Form):
+    status = forms.ChoiceField(choices=JobMatch.STATUS_CHOICES)
