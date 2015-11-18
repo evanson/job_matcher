@@ -25,7 +25,7 @@ from tasks import send_email
 
 def end_session(request):
     logout(request)
-    return HttpResponseRedirect(reverse('login', kwargs={'step': 'user'}))
+    return HttpResponseRedirect('/')
 
 
 @login_required(login_url=reverse_lazy('login', kwargs={'step': 'user'}))
@@ -174,6 +174,7 @@ click this link %s" % (username, confirmation_url)
                                 description=profile_data['description'],
                                 location=profile_data['location'],
                                 address=profile_data['address'])
+            employer.save()
 
         messages.success(self.request,
                          "You've successfully signed up. Please click the activation link sent to your email to activate your account")

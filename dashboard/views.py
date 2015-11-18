@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime, timedelta
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, Http404

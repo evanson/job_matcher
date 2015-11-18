@@ -1,5 +1,8 @@
+import sys
+import logging
+
 def matcher(requirements, candidate):
-    print "Matching %s to requirements %s" % (candidate, requirements)
+    logging.info("Matching %s to requirements %s" % (candidate, requirements))
     matched = False
     skillmatch = False
     skillscore = 0
@@ -23,10 +26,10 @@ def matcher(requirements, candidate):
                 skillscore += 1
                 skillmatch = True
 
-    optionalskills = requirements['optional']
+    optionalskills = set(requirements['optional'])
     extraskills = set(candidate['skills']) - set(requirements['skills'])
 
-    if extraskills:
+    if extraskills and optionalskills:
         if set(optionalskills) == set(extraskills):
             extraskillscore += 0.5
             skillmatch = True
@@ -68,15 +71,22 @@ def matcher(requirements, candidate):
 
     totalscore = skillscore + yearscore + extraskillscore
 
-    print "Got match {}, score: {},  weight: {} for candidate {}".format(matched,
+    logging.info("Got match {}, score: {},  weight: {} for candidate {}".format(matched,
                                                                          totalscore,
                                                                          weight,
-                                                                         candidate['name'])
-    print "--------------------------------------------------------------------------------------------------------------------------------------------------------------"
+                                                                         candidate['name']))
+    logging.info("---------------------------------------------------------------------------------------------------------------------")
     return matched, totalscore, weight
 
 
 if __name__ == '__main__':
+    root = logging.getLogger()
+    root.setLevel(logging.DEBUG)
+
+    ch = logging.StreamHandler(sys.stdout)
+    ch.setLevel(logging.DEBUG)
+    root.addHandler(ch)
+    
     requirements = {'years': 2,
                     'skills': ['Python', 'Ruby', 'Rust', 'Erlang', 'Elixir'],
                     'optional': ['C', 'C++']}
