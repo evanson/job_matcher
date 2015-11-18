@@ -84,7 +84,7 @@ def job_matches(request, id):
         job = Job.objects.get(id=id)
         matches = JobMatch.objects.filter(job=job,
                                           status='interested').order_by(
-                                              '-created_at', '-score')
+                                              '-score')
         page = request.GET.get('page')
         paginator = Paginator(matches, PER_PAGE)
         try:
