@@ -39,6 +39,35 @@ set comparison of required skills & job seeker skills
 
 Matching is done only for available candidates
 
+Include a score for the match: 
+    -> Skill match
+            less than skill match - 1 point
+            exact skill match     - 2 points
+            greater than skill match - 3 points
+
+    -> Years of experience
+            years of experience matching job requirement - 1 point
+            years of experience exceeding job requirement - 0.5 points for
+                                                            each extra
+                                                            year
+            years of experience less than requirement - 0 points
+
+Strong match - (exact skill match + years greater than needed
+    experience) or (greater skill match + exact years of experience)
+    or (greater skill match + years greater than needed)
+Exact match - (exact skill match + exact years needed)
+
+Weak match - (exact skill match + less years of experience) or (less
+skill match + exact years of experience) or (less skill match + less
+years of experience) or (greater skill match + less years of
+experience) or (less skill match + greater years of experience)
+
+Optional skills - add points to the score
+                  less than skill match - 0.25 points
+                  exact skill match     - 0.5 points
+                  greater than skill match - 0.75 points
+        
+
 
 [Models]
 +-------User Profile-------+

@@ -34,6 +34,7 @@ class JobMatch(models.Model):
     
     job = models.ForeignKey(Job)
     seeker = models.ForeignKey(JobSeeker)
+    score = models.FloatField(default=0.0)
     weight = models.SlugField(choices=WEIGHT_CHOICES)
     notification_sent = models.BooleanField(default=False)
     status = models.SlugField(choices=STATUS_CHOICES, default='interested')
