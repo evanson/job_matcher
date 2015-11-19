@@ -4,6 +4,7 @@ from django.conf import settings
 from job_matcher import app
 from job_matcher import twilio_client
 
+
 @app.task
 def send_email(subject, message, recipients):
     try:
