@@ -97,7 +97,7 @@ class CreateUserForm(forms.Form):
 
 class JobSeekerForm(forms.Form):
     category = forms.ChoiceField(choices=JobSkill.JOB_CATEGORIES)
-    summary = forms.CharField(widget=forms.Textarea(attrs={'cols': '10', 'rows': '3'}))
+    summary = forms.CharField(widget=forms.Textarea(attrs={'cols': '10', 'rows': '10'}))
     years_of_experience = forms.CharField(validators=[validate_digit])
     skills = forms.ModelMultipleChoiceField(queryset=JobSkill.objects.all(),
                                             widget=forms.CheckboxSelectMultiple())

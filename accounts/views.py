@@ -21,6 +21,7 @@ from models import UserProfile, JobSeeker, JobSeekerSkill, Employer
 from forms import CreateUserForm, JobSeekerForm, EmployerForm
 
 from tasks import send_email
+from jobs.tasks import match_candidate
 
 
 def end_session(request):
@@ -107,10 +108,12 @@ click this link %s" % (username, confirmation_url)
             for skill in seeker_data['skills']:
                 jobskill = JobSeekerSkill(seeker=jobseekerprofile, skill=skill)
                 jobskill.save()
+
+        match_candidate.delay(jobseekerprofile.id)
             
-            messages.success(self.request,
-                             "You've successfully signed up. Please click the activation link sent to your email to activate your account")
-            return HttpResponseRedirect('/')
+        messages.success(self.request,
+                         "You've successfully signed up. Please click the activation link sent to your email to activate your account")
+        return HttpResponseRedirect('/')
 
 
 COMPANY_FORMS = (
