@@ -39,6 +39,9 @@
             {% ifequal match.weight 'strong' %}
                 <p><i class="fa fa-star fa-4x"></i> </p>
             {% endifequal %}
+            {% ifequal match.weight 'exact' %}
+                <p><i class="fa fa-star fa-4x"></i> </p>
+            {% endifequal %}
             <p class="text-success"><strong>{{match.get_weight_display}}</strong></p>
             <p><strong>Match Score: {{match.score}}</strong></p>
             <p><strong><a href="{% url 'mark_interest' job.id %}">Interest in Job: {{match.get_status_display}}</a></strong></p>

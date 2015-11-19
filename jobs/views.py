@@ -48,7 +48,7 @@ def add_job(request):
             match_job.delay(job.id)
             
             messages.success(request, "Job saved successfully. You'll receive matching candidates soon")
-            return HttpResponseRedirect(reverse('profile'))
+            return HttpResponseRedirect('/')
         return render(request, 'jobs/add_job.html', {'form': form})
     except Exception, e:
         logging.exception(e)
