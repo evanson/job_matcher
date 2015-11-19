@@ -1,3 +1,4 @@
+import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
@@ -9,6 +10,8 @@ import jobs
 
 urlpatterns = patterns(
     '',
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root':settings.STATIC_FILES}),
     url(r'^$', 'dashboard.views.index', name='index'),
     url(r'^accounts/login/$', 'dashboard.views.index', name='index'),
     url(r'^accounts/', include('accounts.urls')),
