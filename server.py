@@ -14,11 +14,11 @@ LOGDIR = '/app/log/job_matcher'
 LOG = 'job_matcher.log'
 
 sys.path.append(HOME)
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "autotrader.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "job_matcher.settings")
 
-from autotrader.wsgi import application as djapp
+from job_matcher.wsgi import application as djapp
 
-application = service.Application('autotrader')
+application = service.Application('job_matcher')
 root = wsgi.WSGIResource(reactor, reactor.getThreadPool(), djapp)
 logfile = DailyLogFile(LOG, LOGDIR)
 
